@@ -29,14 +29,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value="/customers")
 @CrossOrigin(origins = "http://localhost:9000") // Allow requests from your Svelte app origin
-@Tag(name = "CustomerController" ,description = "To perform operations on  customers")
-@ResponseBody
 public class CustomerController {
 
     @Autowired
     CustomerService customerService;
 
-    @Operation(summary = "GET operations on customers", description = "It is used to get customers objects in data base")
+    // -------------------Retrieve All Customers--------------------------------------------
+
     @GetMapping
     public ResponseEntity<List<Customer>> listAllCustomers(@RequestParam(name = "regionId" , required = false) Long regionId ) {
         List<Customer> customers =  new ArrayList<>();
@@ -54,15 +53,14 @@ public class CustomerController {
                 return  ResponseEntity.notFound().build();
             }
         }
-        log.info("Listado de los customerss XD");
+
         return  ResponseEntity.ok(customers);
     }
 
     // -------------------Retrieve Single Customer------------------------------------------
-   @Operation(summary = "GET operations on customers by using customer id", description = "It is used to get customer by id  objects in data base")
 
     @GetMapping(value = "/{id}")
-        public ResponseEntity<Customer> getCustomer(@PathVariable("id") long id) {
+    public ResponseEntity<Customer> getCustomer(@PathVariable("id") long id) {
         log.info("Fetching Customer with id {}", id);
         Customer customer = customerService.getCustomer(id);
         if (  null == customer) {
@@ -73,9 +71,7 @@ public class CustomerController {
     }
 
     // -------------------Create a Customer-------------------------------------------
-    @Operation(summary = "POST operations on customers", description = "It is used to create customers objects in data base")
 
-   @CrossOrigin(origins = "http://localhost:8080") // Allow requests from your Svelte app origin
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer, BindingResult result) {
         log.info("Creating Customer : {}", customer);
@@ -89,7 +85,6 @@ public class CustomerController {
     }
 
     // ------------------- Update a Customer ------------------------------------------------
-    @Operation(summary = "UPDATE operations on customers", description = "It is used to update customers objects in data base")
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
@@ -107,7 +102,6 @@ public class CustomerController {
     }
 
     // ------------------- Delete a Customer-----------------------------------------
-    @Operation(summary = "DELETE operations on customers", description = "It is used to delete customers objects in data base")
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Customer> deleteCustomer(@PathVariable("id") long id) {
@@ -142,5 +136,4 @@ public class CustomerController {
         }
         return jsonString;
     }
-
 }
