@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping(value="/customers")
-@CrossOrigin(origins = "http://localhost:8080") // Allow requests from your Svelte app origin
+@CrossOrigin(origins = "http://localhost:9000") // Allow requests from your Svelte app origin
 @Tag(name = "CustomerController" ,description = "To perform operations on  customers")
 @ResponseBody
 public class CustomerController {
