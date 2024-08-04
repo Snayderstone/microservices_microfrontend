@@ -24,12 +24,10 @@ public class Invoice {
     private String numberInvoice;
     private String description;
 
-    @Column(name = "customer_id")
-    private Long customerId;
-
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+    private String state;
 
     @Valid
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -37,8 +35,15 @@ public class Invoice {
     @JoinColumn(name = "invoice_id")
     private List<InvoiceItem> items;
 
-    private String state;
+    @ManyToOne
+    @JoinColumn(name = "page_mode_id")
+    private PageMode pageMode;
 
+
+    @Column(name = "customer_id")
+    private Long customerId;
+
+    //Este campo no se registra en la base de datos y s eusa con el cliente feing
     @Transient
     private Customer customer;
     public Invoice(){

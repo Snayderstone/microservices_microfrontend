@@ -9,6 +9,7 @@ import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 import com.example.demo.repository.InvoiceItemsRepository;
 import com.example.demo.repository.InvoiceRepository;
+import com.example.demo.repository.PageModeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,15 @@ public class InvoiceServiceImpl implements  InvoiceService {
     InvoiceRepository invoiceRepository;
 
     @Autowired
+    PageModeRepository pageModeRepository;
+
+    @Autowired
     InvoiceItemsRepository invoiceItemsRepository;
+
+    //Inject the CustomerClient to get the customer information
     @Autowired
     CustomerClient customerClient;
-
+    //Inject the ProductClient to get the product information
     @Autowired
     ProductClient productClient;
 
@@ -57,6 +63,7 @@ public class InvoiceServiceImpl implements  InvoiceService {
             return null;
         }
         invoiceDB.setCustomerId(invoice.getCustomerId());
+        invoiceDB.setPageMode(invoice.getPageMode());
         invoiceDB.setDescription(invoice.getDescription());
         invoiceDB.setNumberInvoice(invoice.getNumberInvoice());
         invoiceDB.getItems().clear();
@@ -81,6 +88,7 @@ public class InvoiceServiceImpl implements  InvoiceService {
         if (null != invoice ){
             Customer customer = customerClient.getCustomer(invoice.getCustomerId()).getBody();
             invoice.setCustomer(customer);
+
             List<InvoiceItem> listItem=invoice.getItems().stream().map(invoiceItem -> {
                 Product product = productClient.getProduct(invoiceItem.getProductId()).getBody();
                 invoiceItem.setProduct(product);
