@@ -91,8 +91,11 @@ public class InvoiceServiceImpl implements  InvoiceService {
                 invoiceItem.setProduct(product);
                 return invoiceItem;
             }).collect(Collectors.toList());
+
             invoice.setItems(listItem);
+
         }
+
         return invoice ;
     }
 
