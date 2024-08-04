@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping(value="/regions")
-@CrossOrigin(origins = "http://localhost:9000") // Allow requests from your Svelte app origin
 public class RegionController {
     @Autowired
     RegionService regionService;
