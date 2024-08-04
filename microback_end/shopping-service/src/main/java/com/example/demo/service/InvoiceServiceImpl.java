@@ -26,7 +26,6 @@ public class InvoiceServiceImpl implements  InvoiceService {
     @Autowired
     InvoiceItemsRepository invoiceItemsRepository;
 
-    @Qualifier("com.example.demo.client.CustomerClient")
     @Autowired
     CustomerClient customerClient;
 
