@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
 
   #----------------------DATA BASES-------------------
@@ -56,7 +56,7 @@ services:
       - "9090:9090"
   grafana:
     container_name: grafana_container
-    image: grafana/grafana-oss:8.5.2
+    image: grafana/grafana-oss:10.0.3
     #depends_on: prometheus
     ports:
       - "3000:3000"
@@ -67,5 +67,10 @@ services:
     ports:
       - "9411:9411"
 
+  spring-boot-admin:
+    image: snayderstone/spring-boot-admin-server:latest2
+    container_name: spring-boot-admin
+    ports:
+      - "8086:8086"
 volumes:
   mysql_data:

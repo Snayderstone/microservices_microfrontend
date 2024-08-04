@@ -6,4 +6,7 @@ spring:
       uri: http://localhost:8081
       username: admin
       password: admin
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:8086
