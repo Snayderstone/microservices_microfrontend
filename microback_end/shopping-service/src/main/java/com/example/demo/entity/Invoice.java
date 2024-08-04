@@ -5,7 +5,10 @@ import com.example.demo.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,12 +25,15 @@ public class Invoice {
 
     @Column(name = "number_invoice")
     private String numberInvoice;
+
     private String description;
+
+    @Column(name = "customer_id")
+    private Long customerId;
 
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
-    private String state;
 
     @Valid
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -35,17 +41,11 @@ public class Invoice {
     @JoinColumn(name = "invoice_id")
     private List<InvoiceItem> items;
 
-    @ManyToOne
-    @JoinColumn(name = "page_mode_id")
-    private PageMode pageMode;
+    private String state;
 
-
-    @Column(name = "customer_id")
-    private Long customerId;
-
-    //Este campo no se registra en la base de datos y s eusa con el cliente feing
     @Transient
     private Customer customer;
+
     public Invoice(){
         items = new ArrayList<>();
     }

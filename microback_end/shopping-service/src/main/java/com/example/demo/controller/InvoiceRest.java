@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.entity.Invoice;
 import com.example.demo.service.InvoiceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,7 +22,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/invoices")
-public class InvoiceController {
+public class InvoiceRest {
+
     @Autowired
     InvoiceService invoiceService;
 

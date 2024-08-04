@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 //Clientes de  FeignClient
-@FeignClient(name = "cliente-service")
-@RequestMapping(value="/customers")
-// , fallback = CustomerHystrixFallbackFactory.class)
+@FeignClient(name = "cliente-service" , fallbackFactory = CustomerHystrixFallbackFactory.class)
 public interface  CustomerClient {
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/customers/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable("id") long id);
 }
