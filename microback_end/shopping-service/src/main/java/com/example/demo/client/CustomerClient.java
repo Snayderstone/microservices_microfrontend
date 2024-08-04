@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 //Clientes de  FeignClient
-@FeignClient(name = "cliente-service" )
+@FeignClient(name = "customer-service"  )
 public interface  CustomerClient {
     @GetMapping(value = "/customers/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable("id") long id);
