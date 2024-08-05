@@ -32,6 +32,20 @@ services:
       #PuertoHost:PuertoContenedor
       - '3312:3311'
 
+  mysqlShoppingService:
+    image: mysql:8.0
+    container_name: mysql_shopping_service_bd_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
+      - MYSQL_USER=luis
+      - MYSQL_PASSWORD=mauFJcuf5dhRMQrjj
+      - MYSQL_DATABASE=db_shoppings
+    volumes:
+      #- ./docker/Esquemas:/var/lib/mysql
+      - mysql_shopping_data:/var/lib/mysql
+    ports:
+      #PuertoHost:PuertoContenedor
+      - '3333:3332'
 
   #----------------------MICROSERVICES----------------
   cliente-service:
@@ -91,3 +105,4 @@ services:
 volumes:
   mysql_cliente_data:
   mysql_producto_data:
+  mysql_shopping_data:
