@@ -21,16 +21,16 @@ services:
     image: mysql:8.0
     container_name: mysql_product_service_bd_container
     environment:
-      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
-      - MYSQL_USER=luis
-      - MYSQL_PASSWORD=mauFJcuf5dhRMQrjj
+      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjw
+      - MYSQL_USER=angel
+      - MYSQL_PASSWORD=mauFJcuf5dhRMQrjw
       - MYSQL_DATABASE=productos_db
     volumes:
       #- ./docker/Esquemas:/var/lib/mysql
       - mysql_producto_data:/var/lib/mysql
     ports:
       #PuertoHost:PuertoContenedor
-      - '3309:3308'
+      - '3312:3311'
 
 
   #----------------------MICROSERVICES----------------
@@ -89,4 +89,5 @@ services:
     ports:
       - "8086:8086"
 volumes:
-  mysql_data:
+  mysql_cliente_data:
+  mysql_producto_data:
